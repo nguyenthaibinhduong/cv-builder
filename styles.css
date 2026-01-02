@@ -1,0 +1,427 @@
+:root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --chip: #f3f4f6;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --shadow: rgba(0, 0, 0, .05);
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color .2s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline
+}
+
+/* layout */
+.wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+.topbar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--line);
+}
+
+/* buttons */
+.exportBtn {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .2px;
+    transition: all .2s ease;
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+.exportBtn:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, .18);
+    transform: translateY(-1px);
+}
+
+.lang {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--chip);
+}
+
+.btn {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all .2s ease;
+}
+
+.btn[aria-pressed="true"] {
+    background: #fff;
+    color: var(--accent);
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+/* card */
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 44px;
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+/* header */
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 26px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 26px;
+}
+
+.name {
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+}
+
+.role {
+    margin-top: 10px;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 15.5px;
+    line-height: 1.4;
+}
+
+/* contact meta with icons */
+.meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 300px;
+    color: var(--muted);
+    font-size: 13.5px;
+}
+
+.meta span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.meta span:hover {
+    border-color: #c7d2fe;
+    background: #f8fafc
+}
+
+.meta .ico {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    opacity: .95;
+}
+
+.meta .ico svg {
+    width: 18px;
+    height: 18px
+}
+
+/* grid */
+.grid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 20px;
+}
+
+@media (max-width:900px) {
+    .grid {
+        grid-template-columns: 1fr
+    }
+}
+
+/* headings */
+h2 {
+    font-size: 12px;
+    letter-spacing: .14em;
+    margin: 24px 0 12px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 800;
+}
+
+h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 750;
+}
+
+/* text */
+.sub {
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.55
+}
+
+.muted {
+    color: var(--muted)
+}
+
+.small {
+    font-size: 13px
+}
+
+ul {
+    margin: 8px 0 0 18px
+}
+
+li {
+    margin: 5px 0;
+    font-size: 13.5px;
+    line-height: 1.55
+}
+
+/* blocks */
+.block {
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fafafa;
+    transition: all .2s ease;
+}
+
+.block:hover {
+    background: #f5f5f5;
+    border-color: #d4d4d8
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    background: var(--chip);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-size: 12.5px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.pill:hover {
+    background: #e0e7ff;
+    border-color: #c7d2fe
+}
+
+.section {
+    padding-top: 2px
+}
+
+.section-full {
+    padding-top: 2px;
+    margin-top: 26px
+}
+
+.footerNote {
+    margin-top: 24px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ===== PDF MODE (ONLY when exporting) ===== */
+/* =========================
+   PDF 1-PAGE MODE (A4)
+   ========================= */
+body.pdf-mode {
+    background: #fff !important;
+}
+
+/* Ẩn UI web khi export */
+body.pdf-mode .topbar,
+body.pdf-mode .footerNote {
+    display: none !important;
+}
+
+/* Khung giấy A4 (portrait) */
+body.pdf-mode .wrap {
+    width: 210mm !important;
+    max-width: 210mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+/* Vùng nội dung */
+body.pdf-mode .card {
+    width: 210mm !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    padding: 10mm 10mm 8mm !important;
+    /* lề trong */
+    backdrop-filter: none !important;
+}
+
+/* NÉN layout để fit 1 trang */
+body.pdf-mode .header {
+    padding-bottom: 10px !important;
+    margin-bottom: 10px !important;
+    gap: 12px !important;
+}
+
+body.pdf-mode .name {
+    font-size: 24px !important;
+    line-height: 1.15 !important;
+}
+
+body.pdf-mode .role {
+    margin-top: 4px !important;
+    font-size: 13px !important;
+}
+
+body.pdf-mode .meta {
+    gap: 6px !important;
+    font-size: 12px !important;
+}
+
+body.pdf-mode h2 {
+    margin: 10px 0 6px 0 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.16em !important;
+}
+
+body.pdf-mode h3 {
+    font-size: 13.5px !important;
+    margin-bottom: 4px !important;
+}
+
+body.pdf-mode .sub {
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+}
+
+/* Nén block + list */
+body.pdf-mode .block {
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+}
+
+body.pdf-mode ul {
+    margin: 6px 0 0 16px !important;
+}
+
+body.pdf-mode li {
+    margin: 4px 0 !important;
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+}
+
+/* Chips nhỏ lại để khỏi tràn */
+body.pdf-mode .chips {
+    gap: 6px !important;
+    margin-top: 6px !important;
+}
+
+body.pdf-mode .pill {
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+}
+
+/* Grid 2 cột fit A4 đẹp hơn */
+body.pdf-mode .grid {
+    grid-template-columns: 1.28fr 0.72fr !important;
+    gap: 12px !important;
+}
+
+/* Tránh bị cắt giữa khối */
+body.pdf-mode .header,
+body.pdf-mode .block,
+body.pdf-mode li,
+body.pdf-mode .row {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+}
+
+/* Link cho sạch khi raster */
+body.pdf-mode a {
+    border-bottom: none !important;
+}
