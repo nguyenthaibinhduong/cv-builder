@@ -8,28 +8,31 @@ function renderCV(lang) {
 
     const html = `
     <div class="header">
-      <div>
+      <div class="header-left">
         <h1 class="name">${data.name}</h1>
         <p class="role">${data.role}</p>
+        <p class="personal-info">${lang === "en" ? "Date of Birth" : "Ngày sinh"}: ${data.contact.dateOfBirth}</p>
+        <p class="personal-info">${lang === "en" ? "Gender" : "Giới tính"}: ${data.contact.gender}</p>
+        
       </div>
-      <div class="meta">
-  <span>
-    ${data.contact.location}
-  </span>
-
-  <span>
-    <a href="mailto:${data.contact.email}">${data.contact.email}</a>
-  </span>
-
-  <span>
-    <a href="tel:${data.contact.phone}">${data.contact.phone}</a>
-  </span>
-
-  <span>
-    <a href="${data.contact.githubUrl}" target="_blank" rel="noopener">${data.contact.github}</a>
-  </span>
-</div>
-
+      <div class="header-right">
+        <div class="contact-item">
+          <span class="contact-label">${lang === "en" ? "Location" : "Địa chỉ"}</span>
+          <span class="contact-value">${data.contact.location}</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">${lang === "en" ? "Email" : "Email"}</span>
+          <span class="contact-value"><a href="mailto:${data.contact.email}">${data.contact.email}</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">${lang === "en" ? "Phone" : "Điện thoại"}</span>
+          <span class="contact-value"><a href="tel:${data.contact.phone}">${data.contact.phone}</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">${lang === "en" ? "GitHub" : "GitHub"}</span>
+          <span class="contact-value"><a href="${data.contact.githubUrl}" target="_blank" rel="noopener">${data.contact.github}</a></span>
+        </div>
+      </div>
     </div>
 
     <div class="grid">
@@ -83,19 +86,21 @@ function renderCV(lang) {
             )
             .join("")}
 
-        <h2>${lang === "en" ? "Education" : "Học vấn"}</h2>
-        <div class="block">
-          <h3>${data.education.degree}</h3>
-          <p class="sub">${data.education.school}</p>
-          <p class="muted small">${data.education.coursework}</p>
-        </div>
-
         <h2>${lang === "en" ? "Certifications" : "Chứng chỉ"}</h2>
         <div class="block">
           <ul>
             ${data.certifications.map((cert) => `<li>${cert}</li>`).join("")}
           </ul>
         </div>
+      </div>
+    </div>
+
+    <div class="section-full">
+      <h2>${lang === "en" ? "Education" : "Học vấn"}</h2>
+      <div class="block">
+        <h3>${data.education.degree}</h3>
+        <p class="sub">${data.education.school}</p>
+        <p class="muted small">${data.education.coursework}</p>
       </div>
     </div>
 

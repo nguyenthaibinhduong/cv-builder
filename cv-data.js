@@ -2,8 +2,10 @@
 window.CV_DATA = {
     en: {
         name: "NGUYEN THAI BINH DUONG",
-        role: "Frontend Developer (ReactJS / NextJS / React Native)",
+        role: "Frontend Developer",
         contact: {
+            dateOfBirth: "February 18, 2003",
+            gender: "Male",
             location: "Ho Chi Minh City, Vietnam",
             email: "nguyenthaibinhduong182003@gmail.com",
             phone: "+84 395 659 769",
@@ -105,8 +107,10 @@ window.CV_DATA = {
 
     vi: {
         name: "NGUYỄN THÁI BÌNH DƯƠNG",
-        role: "Lập trình viên Frontend (ReactJS / NextJS / React Native)",
+        role: "Lập trình viên Frontend",
         contact: {
+            dateOfBirth: "18/02/2003",
+            gender: "Nam",
             location: "TP. Hồ Chí Minh, Việt Nam",
             email: "nguyenthaibinhduong182003@gmail.com",
             phone: "+84 395 659 769",
