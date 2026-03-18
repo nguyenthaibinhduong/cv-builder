@@ -11,6 +11,9 @@ window.CV_DATA = {
             phone: "+84 395 659 769",
             github: "github.com/nguyenthaibinhduong",
             githubUrl: "https://github.com/nguyenthaibinhduong",
+            facebookUrl: "https://facebook.com/nguyenthaibinhduong",
+            zaloUrl: "https://zalo.me/84395659769",
+            whatsappUrl: "https://wa.me/84395659769",
         },
         profile:
             'Frontend Developer with <b>1.5 years</b> of hands-on experience building <b>Web</b> (ReactJS / NextJS) and <b>Mobile</b> (React Native) applications. Strong focus on UI/UX, reusable component design, and clean API integration. Comfortable collaborating with backend teams to deliver end-to-end features. Targeting long-term growth toward <b>Senior Frontend Developer</b>.',
@@ -49,6 +52,7 @@ window.CV_DATA = {
                 technologies: "ReactJS, React Native, TailwindCSS, NestJS, Redis, WebSocket",
                 github: "(Coming soon)",
                 demo: "(Coming soon)",
+                demoUrl: "",
                 highlights: [
                     "Built realtime chat UI for both web and mobile, focusing on smooth message rendering.",
                     "Designed responsive layouts and improved overall usability with reusable components.",
@@ -64,6 +68,7 @@ window.CV_DATA = {
                 github: "GitHub Repo",
                 githubUrl: "https://github.com/nguyenthaibinhduong/QLBV",
                 demo: "(Coming soon)",
+                demoUrl: "",
                 highlights: [
                     "Developed an admin dashboard UI for hospital management.",
                     "Implemented forms, data tables, and role-based views for different user permissions.",
@@ -116,6 +121,9 @@ window.CV_DATA = {
             phone: "+84 395 659 769",
             github: "github.com/nguyenthaibinhduong",
             githubUrl: "https://github.com/nguyenthaibinhduong",
+            facebookUrl: "https://facebook.com/nguyenthaibinhduong",
+            zaloUrl: "https://zalo.me/84395659769",
+            whatsappUrl: "https://wa.me/84395659769",
         },
         profile:
             'Lập trình viên Frontend với <b>1.5 năm</b> kinh nghiệm thực chiến phát triển ứng dụng <b>Web</b> (ReactJS / NextJS) và <b>Mobile</b> (React Native). Tập trung mạnh vào UI/UX, thiết kế component tái sử dụng và tích hợp API gọn gàng. Làm việc tốt với team backend để triển khai tính năng end-to-end. Mục tiêu phát triển dài hạn lên <b>Senior Frontend Developer</b>.',
@@ -154,6 +162,7 @@ window.CV_DATA = {
                 technologies: "ReactJS, React Native, TailwindCSS, NestJS, Redis, WebSocket",
                 github: "(Sắp cập nhật)",
                 demo: "(Sắp cập nhật)",
+                demoUrl: "",
                 highlights: [
                     "Xây dựng UI chat realtime cho web và mobile, tối ưu trải nghiệm hiển thị tin nhắn.",
                     "Thiết kế layout responsive và chuẩn hóa component dùng lại.",
@@ -169,6 +178,7 @@ window.CV_DATA = {
                 github: "GitHub Repo",
                 githubUrl: "https://github.com/nguyenthaibinhduong/QLBV",
                 demo: "(Sắp cập nhật)",
+                demoUrl: "",
                 highlights: [
                     "Phát triển giao diện dashboard quản trị cho hệ thống bệnh viện.",
                     "Xây dựng form, bảng dữ liệu và phân quyền hiển thị theo vai trò.",
