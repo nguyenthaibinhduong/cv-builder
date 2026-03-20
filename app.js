@@ -13,6 +13,8 @@ const UI_TEXT = {
     featuredProjects: "Featured Projects",
     techLabel: "Technologies",
     highlightsLabel: "Highlights",
+    imageLabel: "Project Preview",
+    imageUnavailable: "Preview image is updating",
     viewDemo: "View Embedded Demo",
     demoUnavailable: "Demo link not available yet",
     sourceCode: "Source Code",
@@ -42,6 +44,28 @@ const UI_TEXT = {
     quoteSecondary: "Send via WhatsApp",
     quoteRateNote: "Estimated in USD with 1 USD = 25,000 VND",
     trustTitle: "Why Clients Feel Safe Working With Me",
+    trustBoxes: [
+      {
+        icon: "💎",
+        title: "Pixel Perfect UI",
+        desc: "Meticulous attention to design details, ensuring the UI looks exactly like the mockup across all screens."
+      },
+      {
+        icon: "⚡",
+        title: "High Performance",
+        desc: "Optimized code for fast loading times and smooth 60fps animations for a premium user feel."
+      },
+      {
+        icon: "🛡️",
+        title: "Clean & Scalable",
+        desc: "Modular architecture using industry best practices, making it easy to maintain and expand in the future."
+      },
+      {
+        icon: "🤝",
+        title: "Partnership Mindset",
+        desc: "I don't just code; I consult on UX and technical strategies to help your business grow."
+      }
+    ],
     workflowSectionTitle: "Clear Working Process",
     packageIncludes: "Includes",
     packageValue: "Business value",
@@ -175,6 +199,8 @@ const UI_TEXT = {
     featuredProjects: "Dự Án Nổi Bật",
     techLabel: "Công nghệ",
     highlightsLabel: "Điểm nhấn",
+    imageLabel: "Hình ảnh minh họa",
+    imageUnavailable: "Đang cập nhật ảnh minh họa",
     viewDemo: "Xem Demo Nhúng",
     demoUnavailable: "Chưa có link demo",
     sourceCode: "Mã nguồn",
@@ -204,6 +230,28 @@ const UI_TEXT = {
     quoteSecondary: "Gửi qua WhatsApp",
     quoteRateNote: "Chế độ tiếng Anh sẽ quy đổi theo 1 USD = 25.000 VNĐ",
     trustTitle: "Lý Do Khách Hàng An Tâm Hợp Tác",
+    trustBoxes: [
+      {
+        icon: "💎",
+        title: "Giao Diện Pixel Perfect",
+        desc: "Tỉ mỉ trong từng chi tiết layout, đảm bảo sản phẩm thực tế khớp 100% với bản thiết kế (Figma/Adobe XD)."
+      },
+      {
+        icon: "⚡",
+        title: "Hiệu Năng Vượt Trội",
+        desc: "Tối ưu tốc độ tải trang cực nhanh và các chuyển động mượt mà, nâng tầm trải nghiệm người dùng."
+      },
+      {
+        icon: "🛡️",
+        title: "Code Sạch & Dễ Mở Rộng",
+        desc: "Tuân thủ các best practices ngành, kiến trúc module hóa giúp dễ dàng bảo trì và nâng cấp về sau."
+      },
+      {
+        icon: "🤝",
+        title: "Tư Duy Đồng Hành",
+        desc: "Không chỉ viết code, tôi còn tư vấn giải pháp UX và kỹ thuật tối ưu nhất cho mục tiêu kinh doanh của bạn."
+      }
+    ],
     workflowSectionTitle: "Quy Trình Làm Việc Rõ Ràng",
     packageIncludes: "Bao gồm",
     packageValue: "Giá trị mang lại",
@@ -424,6 +472,7 @@ function buildPackageContactLinks(contact, lang, packageName) {
 }
 
 let titleRevealObserver = null;
+let sectionRevealObserver = null;
 const USD_RATE = 25000;
 
 function initTitleReveal() {
@@ -448,6 +497,32 @@ function initTitleReveal() {
   titles.forEach((title) => {
     title.classList.remove("is-visible");
     titleRevealObserver.observe(title);
+  });
+}
+
+function initSectionReveal() {
+  const sections = document.querySelectorAll(".portfolio-scroll-section");
+  if (!sections.length) return;
+
+  if (sectionRevealObserver) {
+    sectionRevealObserver.disconnect();
+  }
+
+  sectionRevealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          sectionRevealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  sections.forEach((section) => {
+    section.classList.remove("is-visible");
+    sectionRevealObserver.observe(section);
   });
 }
 
@@ -674,7 +749,7 @@ function renderPortfolio(lang) {
   const socialIcons = buildSocialIcons(data.contact, lang, false);
 
   const html = `
-    <section class="portfolio-hero">
+    <section class="portfolio-hero portfolio-scroll-section section-light section-tone-hero">
       <div class="liquid-orb orb-1"></div>
       <div class="liquid-orb orb-2"></div>
       <div class="hero-content">
@@ -687,8 +762,62 @@ function renderPortfolio(lang) {
       </div>
     </section>
 
-    <section class="visual-title-wrap">
-      <h2 class="portfolio-heading section-title-xl reveal-title">${txt.visualTitle}</h2>
+    <section class="portfolio-section portfolio-scroll-section section-tone-projects">
+      <h2 class="portfolio-heading section-title-md reveal-title">${txt.featuredProjects}</h2>
+      <p class="section-intro"><i class="fa-solid fa-diagram-project"></i> ${txt.quickStats[0]} • ${txt.quickStats[2]}</p>
+      <div class="portfolio-grid grid-split">
+        ${data.projects
+      .map((proj) => {
+        const hasDemo = Boolean(proj.demoUrl);
+        const imageAlt = `${txt.imageLabel} - ${proj.title}`;
+        const imageBlock = proj.imageUrl
+          ? `<img class="project-image" src="${proj.imageUrl}" alt="${imageAlt}" loading="lazy">`
+          : `<div class="project-image-placeholder">${txt.imageUnavailable}</div>`;
+        return `
+          <article class="portfolio-card card-horizontal">
+            <div class="project-header-full">
+              <h3 class="portfolio-heading section-title-md reveal-title is-visible">${proj.title}</h3>
+              ${proj.tag ? `<span class="pill project-tag">${proj.tag}</span>` : ""}
+            </div>
+
+            <div class="project-content-split">
+              <div class="project-media-wrapper">
+                <div class="project-media${hasDemo ? " is-clickable" : ""}" ${hasDemo ? `data-demo-url="${proj.demoUrl}" data-demo-title="${proj.title}" role="button" tabindex="0"` : ""}>
+                  ${imageBlock}
+                  <div class="project-overlay-hit">View Project Details</div>
+                </div>
+              </div>
+
+              <div class="project-info-wrapper">
+                <p class="sub project-role">${proj.role}</p>
+                ${proj.technologies ? `<p class="project-tech"><b>${txt.techLabel}:</b> ${proj.technologies}</p>` : ""}
+
+                <div class="project-main-desc">
+                  <p class="small"><b>${txt.highlightsLabel}</b></p>
+                  <ul class="project-highlights">
+                    ${proj.highlights.map((item) => `<li>${item}</li>`).join("")}
+                  </ul>
+                </div>
+
+                <div class="portfolio-actions">
+                  <button class="project-btn-premium" ${hasDemo ? `data-demo-url="${proj.demoUrl}" data-demo-title="${proj.title}"` : "disabled"}>
+                    ${hasDemo ? txt.viewDemo : txt.demoUnavailable}
+                  </button>
+                  ${proj.githubUrl
+            ? `<a class="project-link-premium" href="${proj.githubUrl}" target="_blank" rel="noopener">${txt.sourceCode}</a>`
+            : `<span class="project-link-premium muted">${txt.sourceCode}</span>`}
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      })
+      .join("")}
+      </div>
+    </section>
+
+    <section class="visual-title-wrap portfolio-scroll-section section-light section-tone-visual">
+      <h2 class="portfolio-heading section-title-md reveal-title">${txt.visualTitle}</h2>
       <p class="capability-subtitle">${txt.visualSubtitle}</p>
       <div class="capability-layout">
         <div class="metrics-grid">
@@ -728,8 +857,8 @@ function renderPortfolio(lang) {
       </div>
     </section>
 
-    <section class="pricing-section">
-      <h2 class="portfolio-heading section-title-xl reveal-title">${txt.pricingTitle}</h2>
+    <section class="pricing-section portfolio-scroll-section section-tone-pricing">
+      <h2 class="portfolio-heading section-title-md reveal-title">${txt.pricingTitle}</h2>
       <p class="pricing-note">${txt.pricingNote}</p>
       <div class="quote-calculator" data-lang="${lang}">
         <div class="quote-options">
@@ -763,25 +892,19 @@ function renderPortfolio(lang) {
       </div>
     </section>
 
-    <section class="trust-section">
-      <h2 class="portfolio-heading">${txt.trustTitle}</h2>
-      <div class="trust-card">
-        <ul class="timeline-list">
-          ${txt.trustItems.map((item) => `<li>${item}</li>`).join("")}
-        </ul>
-      </div>
-    </section>
-
-    <section class="workflow-section">
-      <h2 class="portfolio-heading">${txt.workflowSectionTitle}</h2>
-      <div class="workflow-grid">
-        ${txt.workflowSteps
+    <section class="trust-section portfolio-scroll-section section-light section-tone-trust">
+      <h2 class="portfolio-heading section-title-md reveal-title">${txt.trustTitle}</h2>
+      <p class="section-intro"><i class="fa-solid fa-shield-heart"></i> ${lang === "vi" ? "Pixel Perfect • Hiệu năng • Kiến trúc sạch" : "Pixel Perfect • Performance • Clean Architecture"}</p>
+      <div class="trust-grid">
+        ${txt.trustBoxes
       .map(
-        (step) => `
-          <article class="workflow-card">
-            <span class="workflow-step">${step.step}</span>
-            <h3>${step.title}</h3>
-            <p class="small muted">${step.desc}</p>
+        (box) => `
+          <article class="trust-box">
+            <div class="trust-icon">${box.icon}</div>
+            <div class="trust-content">
+              <h3>${box.title}</h3>
+              <p class="small muted">${box.desc}</p>
+            </div>
           </article>
         `
       )
@@ -789,44 +912,31 @@ function renderPortfolio(lang) {
       </div>
     </section>
 
-    <section class="portfolio-section">
-      <h2 class="portfolio-heading">${txt.featuredProjects}</h2>
-      <div class="portfolio-grid">
-        ${data.projects
-      .map((proj) => {
-        const hasDemo = Boolean(proj.demoUrl);
-        return `
-          <article class="portfolio-card">
-            <div class="portfolio-card-top">
-              <h3>${proj.title}</h3>
-              ${proj.tag ? `<span class="pill">${proj.tag}</span>` : ""}
-            </div>
-
-            <p class="sub" style="margin-bottom:10px;">${proj.role}</p>
-
-            ${proj.technologies ? `<p class="muted small"><b>${txt.techLabel}:</b> ${proj.technologies}</p>` : ""}
-
-            <div class="portfolio-actions">
-              <button class="project-btn" ${hasDemo ? `data-demo-url="${proj.demoUrl}" data-demo-title="${proj.title}"` : "disabled"}>
-                ${hasDemo ? txt.viewDemo : txt.demoUnavailable}
-              </button>
-              ${proj.githubUrl
-            ? `<a class="project-link" href="${proj.githubUrl}" target="_blank" rel="noopener">${txt.sourceCode}</a>`
-            : `<span class="project-link muted">${txt.sourceCode}</span>`}
-            </div>
-
-            <p class="small" style="margin-top: 12px;"><b>${txt.highlightsLabel}</b></p>
-            <ul>
-              ${proj.highlights.map((item) => `<li>${item}</li>`).join("")}
-            </ul>
-          </article>
-        `;
-      })
+    <section class="workflow-section portfolio-scroll-section section-tone-workflow">
+      <h2 class="portfolio-heading section-title-md reveal-title">${txt.workflowSectionTitle}</h2>
+      <p class="section-intro"><i class="fa-solid fa-route"></i> ${lang === "vi" ? "Chiến lược -> Thiết kế -> Triển khai -> Ra mắt" : "Strategy -> Design -> Build -> Launch"}</p>
+      <div class="workflow-container">
+        <div class="workflow-line"></div>
+        <div class="workflow-grid-v2">
+          ${data.workflow.steps
+      .map(
+        (step) => `
+            <article class="workflow-step-card" tabindex="0">
+              <div class="workflow-step-icon">${step.icon || "🚀"}</div>
+              <div class="workflow-step-info">
+                <span class="workflow-step-num">${step.n}</span>
+                <h3>${step.t}</h3>
+                <p class="workflow-step-desc">${step.p}</p>
+              </div>
+            </article>
+          `
+      )
       .join("")}
+        </div>
       </div>
     </section>
 
-    <section class="hire-cta">
+    <section class="hire-cta portfolio-scroll-section section-tone-cta">
       <h2>${txt.contactTitle}</h2>
       <p>${txt.contactText}</p>
       <div class="cta-actions">
@@ -898,6 +1008,7 @@ function closeDemoModal() {
 
 function setLang(lang) {
   currentLang = lang;
+  document.documentElement.lang = lang === "vi" ? "vi" : "en";
 
   const btnEn = document.getElementById("btn-en");
   const btnVi = document.getElementById("btn-vi");
@@ -910,6 +1021,7 @@ function setLang(lang) {
   renderPortfolio(lang);
   renderFloatingContact(cvData[lang].contact, lang);
   initTitleReveal();
+  initSectionReveal();
   initQuoteCalculator(lang, cvData[lang].contact);
 
   document.getElementById("demo-close").textContent = UI_TEXT[lang].closeDemo;
@@ -970,12 +1082,25 @@ function exportToPDF() {
   document.getElementById("tab-portfolio").addEventListener("click", () => switchView("portfolio"));
 
   document.getElementById("portfolio-container").addEventListener("click", (e) => {
-    const button = e.target.closest(".project-btn[data-demo-url]");
+    const button = e.target.closest("[data-demo-url]");
     if (!button) return;
 
     const url = button.getAttribute("data-demo-url");
     const title = button.getAttribute("data-demo-title") || "Project Demo";
 
+    if (!url) return;
+    openDemoModal(url, title);
+  });
+
+  document.getElementById("portfolio-container").addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+
+    const target = e.target.closest(".project-media[data-demo-url]");
+    if (!target) return;
+
+    e.preventDefault();
+    const url = target.getAttribute("data-demo-url");
+    const title = target.getAttribute("data-demo-title") || "Project Demo";
     if (!url) return;
     openDemoModal(url, title);
   });
